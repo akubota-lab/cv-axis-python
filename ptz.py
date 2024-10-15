@@ -75,7 +75,10 @@ class PTZCamera:
         res = requests.get(f"http://{self.ip}/axis-cgi/com/ptz.cgi?query=position", auth=HTTPDigestAuth(self.username, self.password))
         for line in res.text.splitlines():
             key, value = line.split("=")
-            self.params[key] = value
+            if(key == 'autofocus'):
+                self.params[key] = 1 if value == "on" else 0
+            else:     
+                self.params[key] = float(value)  
 
     def zoom(self, zoom):
         self.params["zoom"] = zoom
