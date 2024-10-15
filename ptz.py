@@ -98,9 +98,9 @@ class PTZCamera:
 
 if __name__ == "__main__":
     args = argparse.ArgumentParser()
-    args.add_argument("--ip", type=str, required=True)
-    args.add_argument("--username", type=str, required=True)
-    args.add_argument("--password", type=str, required=True)
+    args.add_argument("--ip", type=str, default="192.168.0.90")
+    args.add_argument("--username", type=str, default="root")
+    args.add_argument("--password", type=str, default="Pass123")
     args.add_argument("--resolution", type=str, default=PTZCamera.Resolution._1080p)
     args = args.parse_args()
     
