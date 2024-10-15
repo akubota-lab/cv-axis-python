@@ -3,6 +3,7 @@ import cv2
 from requests.auth import HTTPDigestAuth
 import time
 import math
+import argparse
 
 """
 PTZカメラクラス
@@ -96,7 +97,14 @@ class PTZCamera:
         self.update()
 
 if __name__ == "__main__":
-    camera = PTZCamera("192.168.0.90", "root", "Pass123", PTZCamera.Resolution._1080p)
+    args = argparse.ArgumentParser()
+    args.add_argument("--ip", type=str, required=True)
+    args.add_argument("--username", type=str, required=True)
+    args.add_argument("--password", type=str, required=True)
+    args.add_argument("--resolution", type=str, default=PTZCamera.Resolution._1080p)
+    args = args.parse_args()
+    
+    camera = PTZCamera(args.ip, args.username, args.password, args.resolution)
     # 移動前の位置を表示＆保存
     camera.save()
     camera.show("before", 1)
