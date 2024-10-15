@@ -71,12 +71,16 @@ class PTZCamera:
         ## TODO: add error handling
         time.sleep(2) # Wait for the camera to update the parameter
 
-    def get(self):
+    def get(self) -> dict:
         res = requests.get(f"http://{self.ip}/axis-cgi/com/ptz.cgi?query=position", auth=HTTPDigestAuth(self.username, self.password))
         for line in res.text.splitlines():
             key, value = line.split("=")
-            self.params[key] = value
-
+            if(key == 'autofocus'):
+                self.params[key] = value
+            else:     
+                self.params[key] = float(value)  
+        return self.params
+            
     def zoom(self, zoom):
         self.params["zoom"] = zoom
         self.update()
