@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "axis"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["akubota-lab <kubotaarisa@team-lab.com>"]
 readme = "README.md"
